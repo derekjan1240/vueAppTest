@@ -10,13 +10,15 @@
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "server": "nodemon app.js",
-    "start": "node app.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "express": "^4.16.4",
-    "vue": "^2.5.17"
+    "mongoose": "^5.3.13",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",

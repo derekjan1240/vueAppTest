@@ -2,9 +2,15 @@
     <div id="show-blogs">
         <h1>All Blog Articles</h1>
         <input type="text" v-model="search" placeholder="search blogs" />
-        <div v-for="blog in filteredBlogs" :key="blog.id" class="single-blog">
+        
+        <!-- <div v-for="blog in filteredBlogs" :key="blog.id" class="single-blog">
             <router-link v-bind:to="'/blog/' + blog.id"><h2>{{ blog.title }}</h2></router-link>
             <article>{{ blog.body }}</article>
+        </div> -->
+
+        <div v-for="course in courses" :key="course._id" class="single-blog">
+            <router-link v-bind:to="'/blog/1'"><h2>{{ course.courseName }}</h2></router-link>
+            <article>{{ course.courseAbout }}</article>
         </div>
     </div>
 </template>
@@ -17,6 +23,7 @@ import searchMixin from '../mixins/searchMixin';
 export default {
     data () {
         return {
+            courses: [],
             blogs: [],
             search: ''
         }
@@ -26,11 +33,14 @@ export default {
     created() {
 
         // axios.get('https://jsonplaceholder.typicode.com/posts')
-        
-        axios.get('http://127.0.0.1:3000/data')
+        // http://127.0.0.1:3000/course/free/all
+        // http://127.0.0.1:3000/data
+        axios.get('http://127.0.0.1:3000/course/free/all')
         .then((response) => {
-            console.log(response.data.slice(0,5));
-            this.blogs = response.data.slice(0,5);
+            console.log(response);
+            // this.blogs = response.data.slice(0,5);
+            this.courses = response.data.slice(0,5);
+            console.log(this.courses);
         })
         .catch((error)=> {
             console.log(error);

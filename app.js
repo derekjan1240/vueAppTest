@@ -3,9 +3,29 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-app.use(bodyParser.json());
+const mongoose = require('mongoose');
 
-// app.use('/static', express.static(__dirname + '/dist'));
+const keys = require('./src/server/config/keys');
+// const userRoutes = require('./routes/user-routes');
+// const videosRoutes = require('./routes/videos-routes');
+const courseRoutes = require('./src/server/routes/courses-routes');
+
+//bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+// connect to mongodb
+mongoose.connect(keys.mongodb.dbURI, () => {
+    console.log('connected to mongodb');
+});
+
+// set up routes
+app.use('/course', courseRoutes);
+// app.use('/user', userRoutes);
+// app.use('/video', videosRoutes);
+
 app.use(express.static(path.join(__dirname, 'dist')));
 
 
