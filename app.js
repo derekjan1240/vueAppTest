@@ -4,10 +4,9 @@ const path = require('path');
 const app = express();
 
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const keys = require('./src/server/config/keys');
-// const userRoutes = require('./routes/user-routes');
-// const videosRoutes = require('./routes/videos-routes');
 const courseRoutes = require('./src/server/routes/courses-routes');
 
 //bodyParser
@@ -16,19 +15,22 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+//accept CORS
+app.use(cors());
+
 // connect to mongodb
-mongoose.connect(keys.mongodb.dbURI, () => {
+mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }, () => {
     console.log('connected to mongodb');
 });
 
 // set up routes
 app.use('/course', courseRoutes);
-// app.use('/user', userRoutes);
-// app.use('/video', videosRoutes);
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
 
+
+//data for test data
 app.get('/data', function(req, res) {
 	
     results =	[

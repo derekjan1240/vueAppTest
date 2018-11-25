@@ -4,8 +4,8 @@ const router = require('express').Router();
 
 
 router.get('/free/all', (req, res) => {
-	Course.find({coursePay: "Free"}).then((Course) => {
 
+	Course.find({coursePay: "Free"}).then((Course) => {
         res.header("Content-Type",'application/json');
     	res.send(JSON.stringify(Course, null, 4));
     });
@@ -13,12 +13,19 @@ router.get('/free/all', (req, res) => {
 
 
 router.get('/free/:courseName', (req, res) => {
-	// console.log('1');
 
 	Course.find({courseName: req.params.courseName, coursePay: "Free"}).then((Course) => {
-		// console.log('2');
-        res.header("Content-Type",'application/json');
-    	res.send(JSON.stringify(Course, null, 4));
+		// console.log(Course);
+		if (typeof Course !== 'undefined' && Course.length > 0) {
+		    res.header("Content-Type",'application/json');
+    		res.send(JSON.stringify(Course[0], null, 4));
+		}else{
+			res.header("Content-Type",'application/json');
+    		res.send(JSON.stringify({
+				msg: 'can not find the course!'
+			}, null, 4));
+		}
+        
     });
 });
 

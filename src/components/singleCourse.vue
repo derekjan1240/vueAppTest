@@ -18,10 +18,8 @@ export default {
     },
     created() {
 
-        // axios.get('http://127.0.0.1:3000/data')
-
         axios.get('http://127.0.0.1:3000/course/free/' + this.courseName).then((res)=>{
-            console.log(res.data);
+            // console.log(res.data);
             this.course = res.data;
         });
     }

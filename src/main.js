@@ -4,6 +4,9 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import Routes from './routes'
 
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 // Use vue-resource package
 Vue.use(VueRouter);
 Vue.use(axios);

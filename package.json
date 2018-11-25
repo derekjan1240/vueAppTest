@@ -3,20 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    // "serve": "vue-cli-service serve",
-    // "build": "vue-cli-service build",
-    // "lint": "vue-cli-service lint"
-
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "server": "nodemon app.js",
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+    
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^4.0.0-beta.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
+    "jquery": "^3.3.1",
     "mongoose": "^5.3.13",
+    "popper.js": "^1.14.5",
     "vue": "^2.5.17",
     "vue-router": "^3.0.2"
   },
