@@ -6,12 +6,23 @@ const router = require('express').Router();
 router.get('/free/all', (req, res) => {
 	Course.find({coursePay: "Free"}).then((Course) => {
 
-		// console.log('courrse:', Course);
-
         res.header("Content-Type",'application/json');
     	res.send(JSON.stringify(Course, null, 4));
     });
-})
+});
+
+
+router.get('/free/:courseName', (req, res) => {
+	// console.log('1');
+
+	Course.find({courseName: req.params.courseName, coursePay: "Free"}).then((Course) => {
+		// console.log('2');
+        res.header("Content-Type",'application/json');
+    	res.send(JSON.stringify(Course, null, 4));
+    });
+});
+
+
 
 /* 總覽頁面 
 //免費影片

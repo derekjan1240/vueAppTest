@@ -9,7 +9,7 @@
         </div> -->
 
         <div v-for="course in courses" :key="course._id" class="single-blog">
-            <router-link v-bind:to="'/blog/1'"><h2>{{ course.courseName }}</h2></router-link>
+            <router-link v-bind:to="'/course/'+ course.courseName"><h2>{{ course.courseName }}</h2></router-link>
             <article>{{ course.courseAbout }}</article>
         </div>
     </div>
@@ -37,7 +37,7 @@ export default {
         // http://127.0.0.1:3000/data
         axios.get('http://127.0.0.1:3000/course/free/all')
         .then((response) => {
-            console.log(response);
+            // console.log(response);
             // this.blogs = response.data.slice(0,5);
             this.courses = response.data.slice(0,5);
             console.log(this.courses);
