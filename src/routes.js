@@ -1,11 +1,13 @@
 import addBlog from './components/addBlog.vue';
-import showBlog from './components/showBlog.vue';
-import singleBlog from './components/singleBlog.vue';
+import allFreeCourse from './components/allFreeCourse.vue';
+import allExtraCourse from './components/allExtraCourse.vue';
 import singleCourse from './components/singleCourse.vue';
 
+
 export default [
-    { path: '/', component: showBlog},
+    { path: '/', component: allFreeCourse},
+    { path: '/course/free', component: allFreeCourse},
+    { path: '/course/extra', component: allExtraCourse},
     { path: '/add', component: addBlog},
-    { path: '/blog/:id', component: singleBlog},
     { path: '/course/:courseName', component: singleCourse}
 ]

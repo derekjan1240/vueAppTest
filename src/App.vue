@@ -7,8 +7,6 @@
 
 <script>
 // Imports
-import showBlog from './components/showBlog.vue';
-import listBlogs from './components/listBlogs.vue';
 import header from './components/header.vue'; 
 
 
