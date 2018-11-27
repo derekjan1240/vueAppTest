@@ -1,7 +1,5 @@
 <template>
     <div id="single-blog">
-        <!-- <h1>{{ course.courseName }}</h1> -->
-        <!-- <article>{{ course }}</article> -->
 
         <!-- 影片標題 -->
         <div class="container"> 
@@ -13,11 +11,18 @@
 
         <!-- 影片區 -->
         <div class="container">
-            <div id= "episodeList" class="col-sm-3">
+            <div class="row">
+            <div id= "episodeList" class="col-2">
+                <ul class="list-group">
+                    <li 
+                        v-for="n in course.courseTotalEp" 
+                        class="list-group-item"
+                        v-on:click="changeSrc(n)"
+                    >EP_{{ n }}</li>
+                </ul>
             </div>    
-            <div id="video" class="col-sm-6">
-                <video class="video" id="videoPlayer" controls controlsList="nodownload" style="width: 100%;">
-                <source v-bind:src="'/video/' + courseName + '/' + courseId" type="video/mp4">
+            <div id="video" class="col-10">
+                <video class="video" id="videoPlayer" controls controlsList="nodownload" :src="srcUrl" style="width: 100%;">
                 </video>
             </div>    
         </div>
@@ -32,8 +37,16 @@ export default {
     data () {
         return {
             courseName: this.$route.params.courseName,
+            srcUrl: '',
             courseId: 1,
             course: {}
+        }
+    },
+    methods: {
+        changeSrc: function(ep){
+            console.log(ep);
+            // this.courseId = ep;
+            this.srcUrl = '/video/' + this.course.courseName + '/' + ep;
         }
     },
     created() {
@@ -41,6 +54,7 @@ export default {
         axios.get('http://127.0.0.1:3000/course/' + this.courseName).then((res)=>{
             // console.log(res.data);
             this.course = res.data;
+            this.srcUrl = '/video/' + res.data.courseName + '/1';
         });
     }
 }
