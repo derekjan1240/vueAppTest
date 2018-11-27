@@ -3,18 +3,33 @@ const Course = require('../models/course-model');
 const router = require('express').Router();
 
 
-router.get('/free/all', (req, res) => {
+router.get('/:courseType/all', (req, res) => {
 
-	Course.find({coursePay: "Free"}).then((Course) => {
-        res.header("Content-Type",'application/json');
-    	res.send(JSON.stringify(Course, null, 4));
-    });
+	if(req.params.courseType === 'free'){
+		Course.find({coursePay: "Free"}).then((Course) => {
+	        res.header("Content-Type",'application/json');
+	    	res.send(JSON.stringify(Course, null, 4));
+	    });
+	}else if(req.params.courseType === 'extra'){
+		Course.find({coursePay: { $ne: "Free" }}).then((Course) => {
+	        res.header("Content-Type",'application/json');
+	    	res.send(JSON.stringify(Course, null, 4));
+	    });
+	}else{
+		res.header("Content-Type",'application/json');
+		res.send(JSON.stringify({
+			msg: 'can not find the courseType!'
+		}, null, 4));
+	}
+
+	
 });
 
 
-router.get('/free/:courseName', (req, res) => {
 
-	Course.find({courseName: req.params.courseName, coursePay: "Free"}).then((Course) => {
+
+router.get('/:courseName', (req, res) => {
+	Course.find({courseName: req.params.courseName}).then((Course) => {
 		// console.log(Course);
 		if (typeof Course !== 'undefined' && Course.length > 0) {
 		    res.header("Content-Type",'application/json');

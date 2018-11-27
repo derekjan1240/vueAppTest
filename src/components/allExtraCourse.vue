@@ -2,7 +2,7 @@
     <div id="show-course">
         <div class="container">
             <h1>The Extra Course</h1>
-            <input type="text" v-model="search" placeholder="search blogs"/>
+            <!-- <input type="text" v-model="search" placeholder="search blogs"/> -->
             <br><br>
             <div class="row">
                 <div v-for="course in courses" :key="course._id" class="col-sm-3 py-2">
@@ -11,7 +11,8 @@
                         <div class="card-body">
                             <h3 class="card-title text-white">{{ course.courseName }}</h3>
                             <p class="card-text">{{ course.courseAbout }}</p>
-                            <router-link v-bind:to="'/course/'+ course.courseName"><a class="btn btn-outline-secondary text-white">Go somewhere</a></router-link>
+                            <p class="card-text">NT{{ course.coursePay }}$</p>
+                            <router-link v-bind:to="'/show/course/'+ course.courseName"><a class="btn btn-outline-secondary text-white">View Course</a></router-link>
                         </div>
                     </div>  
                 </div>
@@ -39,10 +40,10 @@ export default {
     },
     created() {
 
-        axios.get('http://127.0.0.1:3000/course/free/all')
+        axios.get('http://127.0.0.1:3000/course/extra/all')
         .then((res) => {
             this.courses = res.data;
-            // console.log(this.courses);
+            console.log(this.courses);
         })
         .catch((error)=> {
             console.log(error);
