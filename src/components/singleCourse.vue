@@ -15,7 +15,7 @@
             <div id= "episodeList" class="col-2">
                 <ul class="list-group">
                     <li 
-                        v-for="n in course.courseTotalEp" 
+                        v-for="n in course.courseTotalEp" :key="n"
                         class="list-group-item"
                         v-on:click="changeSrc(n)"
                     >EP_{{ n }}</li>
