@@ -76,9 +76,9 @@ app.get('/video/:courseName/:coursrEp', (req, res, next) => {
 });
 
 
-app.get('*', function(req, res) {
-    res.sendfile('./dist/index.html');
-});
+// app.get('*', function(req, res) {
+//     res.sendfile('./dist/index.html');
+// });
 
 
 // listen on port

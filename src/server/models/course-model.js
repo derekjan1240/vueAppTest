@@ -6,6 +6,7 @@ const courseSchema = new Schema({
     courseType:     String,
     courseAbout: 	String,
     coursePath:     String,
+    thumbnailPath:  String,
     courseTotalEp:  Number,    //總集數
     coursePay:{
         type: String,
