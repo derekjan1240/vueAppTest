@@ -24,10 +24,11 @@ mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }, () => {
     console.log('connected to mongodb');
 });
 
+//static file
+app.use(express.static(path.join(__dirname, 'dist')));
+
 // set up routes
 app.use('/course', courseRoutes);
-
-app.use(express.static(path.join(__dirname, 'dist')));
 
 /*temp route*/
 //影片封包
@@ -75,10 +76,9 @@ app.get('/video/:courseName/:coursrEp', (req, res, next) => {
 
 });
 
-
-// app.get('*', function(req, res) {
-//     res.sendfile('./dist/index.html');
-// });
+app.get('*', (req, res) => {
+    res.sendfile('./dist/index.html');
+});
 
 
 // listen on port

@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         changeSrc: function(ep){
-            console.log(ep);
+            // console.log(ep);
             // this.courseId = ep;
             this.srcUrl = '/video/' + this.course.courseName + '/' + ep;
         }
