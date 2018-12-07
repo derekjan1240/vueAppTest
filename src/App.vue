@@ -25,6 +25,7 @@ export default {
 
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
 body{
     margin: 0;
     font-family: 'Noto Sans TC', 'Nunito SemiBold';

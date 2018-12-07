@@ -2,6 +2,7 @@
     <nav>
         <ul>
             <li><router-link to="/" exact>Home</router-link></li>
+            <li><router-link to="/login" exact>Login</router-link></li>
             <li><router-link to="/show/course/free" exact>Free Course</router-link></li>
             <li><router-link to="/show/course/extra" exact>Extra Course</router-link></li>
         </ul>

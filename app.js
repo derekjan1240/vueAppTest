@@ -76,6 +76,22 @@ app.get('/video/:courseName/:coursrEp', (req, res, next) => {
 
 });
 
+app.post('/auth/signin',(req, res)=> {
+	console.log('req:', req.body);
+	res.header("Content-Type",'application/json');
+	res.send(JSON.stringify({
+		msg: 'OK!'
+	}, null, 4));
+});
+
+app.post('/auth/signup',(req, res)=> {
+	console.log('req:', req.body);
+	res.header("Content-Type",'application/json');
+	res.send(JSON.stringify({
+		msg: 'OK!'
+	}, null, 4));
+});
+
 app.get('*', (req, res) => {
     res.sendfile('./dist/index.html');
 });
