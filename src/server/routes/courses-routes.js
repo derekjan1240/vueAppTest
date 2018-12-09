@@ -21,11 +21,8 @@ router.get('/:courseType/all', (req, res) => {
 			msg: 'can not find the courseType!'
 		}, null, 4));
 	}
-
 	
 });
-
-
 
 
 router.get('/:courseName', (req, res) => {
@@ -43,6 +40,11 @@ router.get('/:courseName', (req, res) => {
         
     });
 });
+
+
+module.exports = router;
+
+
 
 
 
@@ -258,5 +260,3 @@ router.get('/:courseName/:courseId', (req, res) => {
 });
 
 */
-
-module.exports = router;

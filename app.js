@@ -9,6 +9,7 @@ const cors = require('cors');
 
 const keys = require('./src/server/config/keys');
 const courseRoutes = require('./src/server/routes/courses-routes');
+const authRoutes = require('./src/server/routes/auth-routes');
 
 //bodyParser
 app.use(bodyParser.json());
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // set up routes
 app.use('/course', courseRoutes);
+app.use('/auth', authRoutes);
 
 /*temp route*/
 //影片封包
@@ -74,22 +76,6 @@ app.get('/video/:courseName/:coursrEp', (req, res, next) => {
 		fs.createReadStream(path).pipe(res)
 	}
 
-});
-
-app.post('/auth/signin',(req, res)=> {
-	console.log('req:', req.body);
-	res.header("Content-Type",'application/json');
-	res.send(JSON.stringify({
-		msg: 'OK!'
-	}, null, 4));
-});
-
-app.post('/auth/signup',(req, res)=> {
-	console.log('req:', req.body);
-	res.header("Content-Type",'application/json');
-	res.send(JSON.stringify({
-		msg: 'OK!'
-	}, null, 4));
 });
 
 app.get('*', (req, res) => {

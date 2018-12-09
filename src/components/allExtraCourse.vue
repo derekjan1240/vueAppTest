@@ -24,7 +24,6 @@
 
 <script>
 // Imports
-import axios from 'axios';
 import searchMixin from '../mixins/searchMixin';
 
 export default {
@@ -40,10 +39,10 @@ export default {
     },
     created() {
 
-        axios.get('http://127.0.0.1:3000/course/extra/all')
+        this.$http.get('http://127.0.0.1:3000/course/extra/all')
         .then((res) => {
             this.courses = res.data;
-            console.log(this.courses);
+            // console.log(this.courses);
         })
         .catch((error)=> {
             console.log(error);

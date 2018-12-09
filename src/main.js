@@ -1,17 +1,19 @@
 import Vue from 'vue'
-import axios from 'axios'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import Routes from './routes'
+import http from './assets/js/http'
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Use vue-resource package
 Vue.use(VueRouter);
-Vue.use(axios);
+// Vue.use(axios);
+Vue.prototype.$http = http
 
 Vue.config.productionTip = false
+
 
 // Register routes
 const router = new VueRouter({

@@ -46,26 +46,26 @@
 
 <script>
 // Imports
-import axios from 'axios';
 import searchMixin from '../mixins/searchMixin';
 
 export default {
     data () {
         return {
             userName: '',
-            password: '',
+            password: ''
             // submitted: false
         }
     },
     methods: {
         signin(){
 
-            axios.post('http://127.0.0.1:3000/auth/signin', {
+            this.$http.post('http://127.0.0.1:3000/auth/signin', {
               userName: this.userName,
               password: this.password
             })
             .then((res)=> {
                 console.log(res);
+                localStorage.setItem('token', res.data.message);
                 // this.submitted = true;
             })
             .catch((error)=> {
@@ -75,7 +75,7 @@ export default {
         },
         signup(){
 
-            axios.post('http://127.0.0.1:3000/auth/signup', {
+            this.$http.post('http://127.0.0.1:3000/auth/signup', {
               userName: this.userName,
               password: this.password
             })
