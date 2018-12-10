@@ -30,9 +30,7 @@ export default {
     data () {
         return {
             courses: [],
-            search: '',
-            dismissSecs: 5,
-            dismissCountDown: 0
+            search: ''
         }
     },
     methods: {

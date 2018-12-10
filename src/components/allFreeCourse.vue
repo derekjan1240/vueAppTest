@@ -40,8 +40,8 @@ export default {
         this.$http.get('http://127.0.0.1:3000/course/free/all')
         .then((res) => {
             // this.courses = res.data.slice(0,5);
+            // console.log(res);
             this.courses = res.data;
-            // console.log(this.courses);
         })
         .catch((error)=> {
             console.log(error);
