@@ -5,7 +5,6 @@
             <li><router-link to="/login" exact>Login</router-link></li>
             <li><router-link to="/show/course/free" exact>Free Course</router-link></li>
             <li><router-link to="/show/course/extra" exact>Extra Course</router-link></li>
-            <li><router-link to="/profile" exact>Profile</router-link></li>
         </ul>
     </nav>
 </template>

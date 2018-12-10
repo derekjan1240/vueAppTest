@@ -16,6 +16,7 @@ export default {
     },
     data () {
         return {
+            status : false
         }
     },
     methods: {

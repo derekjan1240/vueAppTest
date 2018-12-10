@@ -7,40 +7,54 @@
               action="/something"
               method="post"
             >
-                <div class="textbox">
-                    <i class="fas fa-user"></i>
-                    <label for="email">Email address</label>
-                    <input
-                      id="email"
-                      v-model.lazy="userName"
-                      type="email"
-                      name="userName"
-                      placeholder="Enter email" 
-                      required="true"
-                    >
+                <!-- unlogin -->
+                <div v-if="!isLogin">
+                    <div class="textbox">
+                        <i class="fas fa-user"></i>
+                        <label for="email">Email address</label>
+                        <input
+                          id="email"
+                          v-model.lazy="userName"
+                          type="email"
+                          name="userName"
+                          placeholder="Enter email" 
+                          required="true"
+                        >
+                    </div>
+                    <div class="textbox">
+                        <i class="fas fa-lock"></i>
+                        <label for="password">User Password</label>
+                        <input
+                          id="password"
+                          v-model.lazy="password"
+                          type="password"
+                          name="password"
+                          placeholder="Enter Password" 
+                          required="true"
+                        >
+                    </div>
+                    <div class='btnbox'>
+                        <button v-on:click.prevent="signin" class="btn btn-primary">登入</button>
+                        <button v-on:click.prevent="signup" class="btn btn-primary">註冊</button>
+                    </div>
                 </div>
-                <div class="textbox">
-                    <i class="fas fa-lock"></i>
-                    <label for="password">Password</label>
-                    <input
-                      id="password"
-                      v-model.lazy="password"
-                      type="password"
-                      name="password"
-                      placeholder="Enter Password" 
-                      required="true"
-                    >
+
+                <!-- unLogin -->
+                <div v-if="isLogin"> 
+                    <h4 style="text-align: center;">登入成功</h5>
+                    <div class='btnbox'>
+                        <button v-on:click.prevent="verifyToken" class="btn btn-primary">解析 Token</button>
+                        <button v-on:click.prevent="deleteToken" class="btn btn-primary">移除 Token</button>
+                    </div>
                 </div>
-                <div class='btnbox'>
-                    <button v-on:click.prevent="signin" class="btn btn-primary">登入</button>
-                    <button v-on:click.prevent="signup" class="btn btn-primary">註冊</button>
-                </div>
-                
             </form>
+            <!-- show token payload -->
+            <div v-if="isAuthData" style="width: 100%; text-align: center; margin: 50px;">
+                <h5>jwt payload</h5>
+                <h5>{{AuthData.payload}}</h5>
+            </div>
         </div>
-        <!-- <div v-if="submitted" style="width: 100%; text-align: center; margin: 50px;">
-            <h3>Thanks for your post</h3>
-        </div> -->
+        
     </div>
 </template>
 
@@ -52,8 +66,10 @@ export default {
     data () {
         return {
             userName: '',
-            password: ''
-            // submitted: false
+            password: '',
+            AuthData: '',
+            isLogin: false,
+            isAuthData: false
         }
     },
     methods: {
@@ -64,15 +80,18 @@ export default {
               password: this.password
             })
             .then((res)=> {
-                console.log(res);
-                localStorage.setItem('token', res.data.message);
-                // this.submitted = true;
+                // console.log('res:', res);
+                if(res.data.token){
+                    localStorage.setItem('token', res.data.token);
+                    this.isLogin = true;
+                }
             })
             .catch((error)=> {
-                console.log(error);
+                console.log('error:', error);
             });
 
         },
+
         signup(){
 
             this.$http.post('http://127.0.0.1:3000/auth/signup', {
@@ -80,13 +99,38 @@ export default {
               password: this.password
             })
             .then((res)=> {
-                console.log(res);
-                // this.submitted = true;
+                // console.log('res:', res);
             })
             .catch((error)=> {
-                console.log(error);
+                console.log('error:', error);
             });
 
+        },
+
+        verifyToken(){
+
+            this.$http.post('http://127.0.0.1:3000/auth/verifyToken', {
+              userName: this.userName,
+              password: this.password
+            })
+            .then((res)=> {
+                this.isAuthData = true;
+                this.AuthData = res.data.authData;
+            })
+            .catch((error)=> {
+                console.log('error:', error);
+            });
+
+        },
+
+        deleteToken(){
+
+            if(localStorage.getItem('token')){
+                console.log('Remove token!');
+                localStorage.removeItem('token');
+                this.isAuthData = false;
+                this.isLogin = false;
+            }
         }
     },
     created() {
